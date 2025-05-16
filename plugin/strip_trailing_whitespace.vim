@@ -198,6 +198,8 @@ function s:OnBufEnter() abort
 		" Parsing the lua Ex command can fail on broken Vim <8.2.1908 installs
 		execute 'lua vim.api.nvim_buf_attach(0, false, {
 					\ on_lines = function(_, bufnr, _, firstline, lastline, new_lastline)
+					\ vim.b.stw_root = vim.v.null
+					\ vim.b.stw_count = 0
 					\ vim.api.nvim_call_function("StripTrailingWhitespaceListener", {bufnr, firstline + 1, lastline + 1, new_lastline - lastline,
 					\ {{lnum = firstline + 1, ["end"] = lastline + 1, added = new_lastline - lastline, col = 1}}})
 					\ end, })'
